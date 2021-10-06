@@ -1,5 +1,4 @@
 {
-  "minMsi": 40,
   "timeout": 10,
   "source": {
     "directories": [
