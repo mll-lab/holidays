@@ -1,8 +1,8 @@
 {
-  "name": "spawnia/php-package-template",
+  "name": "mll-lab/holidays",
   "type": "library",
-  "description": "GitHub repository template for a PHP package",
-  "homepage": "https://github.com/spawnia/php-package-template",
+  "description": "PHP package to evaluate if a day is a holiday at MLL",
+  "homepage": "https://github.com/mll-lab/holidays",
   "license": "MIT",
   "authors": [
     {
@@ -36,19 +36,19 @@
   },
   "autoload": {
     "psr-4": {
-      "Spawnia\\PhpPackageTemplate\\": "src/"
+      "MLL\\Holidays\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Spawnia\\PhpPackageTemplate\\Tests\\": "tests/"
+      "MLL\\Holidays\\Tests\\": "tests/"
     },
     "files": [
       "vendor/symfony/var-dumper/Resources/functions/dump.php"
     ]
   },
   "support": {
-    "issues": "https://github.com/spawnia/php-package-template/issues",
-    "source": "https://github.com/spawnia/php-package-template"
+    "issues": "https://github.com/mll-lab/holidays/issues",
+    "source": "https://github.com/mll-lab/holidays"
   }
 }

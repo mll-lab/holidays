@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Spawnia\PhpPackageTemplate\Tests\Unit;
+namespace MLL\Holidays\Tests\Unit;
 
 use PHPUnit\Framework;
-use Spawnia\PhpPackageTemplate\Example;
+use MLL\Holidays\Example;
 
 class ExampleTest extends Framework\TestCase
 {
     public function testGreetIncludesName(): void
     {
-        $name = 'spawnia';
+        $name = 'mll-lab';
         $example = new Example($name);
 
         self::assertStringContainsString($name, $example->greet());

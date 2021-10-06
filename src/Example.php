@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spawnia\PhpPackageTemplate;
+namespace MLL\Holidays;
 
 class Example
 {

@@ -1,34 +1,34 @@
-# php-package-template
+# holidays
 
-[![Continuous Integration](https://github.com/spawnia/php-package-template/workflows/Continuous%20Integration/badge.svg)](https://github.com/spawnia/php-package-template/actions)
-[![Code Coverage](https://codecov.io/gh/spawnia/php-package-template/branch/master/graph/badge.svg)](https://codecov.io/gh/spawnia/php-package-template)
-[![StyleCI](https://github.styleci.io/repos/207373158/shield?branch=master)](https://github.styleci.io/repos/207373158)
+[![Continuous Integration](https://github.com/mll-lab/holidays/workflows/Continuous%20Integration/badge.svg)](https://github.com/mll-lab/holidays/actions)
+[![Code Coverage](https://codecov.io/gh/mll-lab/holidays/branch/master/graph/badge.svg)](https://codecov.io/gh/mll-lab/holidays)
+[![StyleCI](https://github.styleci.io/repos/414166520/shield?branch=master)](https://github.styleci.io/repos/414166520)
 
-[![Latest Stable Version](https://poser.pugx.org/spawnia/php-package-template/v/stable)](https://packagist.org/packages/spawnia/php-package-template)
-[![Total Downloads](https://poser.pugx.org/spawnia/php-package-template/downloads)](https://packagist.org/packages/spawnia/php-package-template)
+[![Latest Stable Version](https://poser.pugx.org/mll-lab/holidays/v/stable)](https://packagist.org/packages/mll-lab/holidays)
+[![Total Downloads](https://poser.pugx.org/mll-lab/holidays/downloads)](https://packagist.org/packages/mll-lab/holidays)
 
-GitHub repository template for a PHP package
+Holidays
 
 # Remove this section after cloning
 
 Search & Replace with your title:
 
 ```
-GitHub repository template for a PHP package
+Holidays
 ```
 
 Search & Replace with your package name:
 
 ```
-php-package-template
-PhpPackageTemplate
+holidays
+Holidays
 ```
 
 Search & Replace with your username/vendor (match case):
 
 ```
-spawnia
-Spawnia
+mll-lab
+MLL
 ```
 
 Set up StyleCI at https://github.styleci.io and replace the link in the badge.
@@ -37,7 +37,7 @@ Link the package at https://packagist.org
 
 Enable code coverage at https://codecov.io
 
-Thanks to @localheinz for providing the inspiration for this template: https://github.com/ergebnis/php-package-template
+Thanks to @localheinz for providing the inspiration for this template: https://github.com/ergebnis/holidays
 
 # Remove this section after cloning
 
@@ -46,7 +46,7 @@ Thanks to @localheinz for providing the inspiration for this template: https://g
 Install through composer
 
 ```sh
-composer require spawnia/php-package-template
+composer require mll-lab/holidays
 ```
 
 ## Usage
