@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use MLL\Holidays\Holidays;
 use PHPUnit\Framework\TestCase;
 
-
 final class HolidaysTest extends TestCase
 {
     public function testName(): void
@@ -17,7 +16,6 @@ final class HolidaysTest extends TestCase
         self::assertSame(Holidays::SONNTAG, Holidays::name(self::sunday()));
         var_dump(self::easter2019());
         self::assertSame(Holidays::OSTERSONNTAG, Holidays::name(self::easter2019()));
-
     }
 
     /**
@@ -53,7 +51,6 @@ final class HolidaysTest extends TestCase
             'Should not mutate the original date'
         );
     }
-
 
     protected static function workingDayWednesday(): Carbon
     {
@@ -92,4 +89,3 @@ final class HolidaysTest extends TestCase
         yield [self::easter2019()];
     }
 }
-
