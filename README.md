@@ -17,7 +17,11 @@ composer require mll-lab/holidays
 
 ## Usage
 
-:bulb: This is a great place for showing a few usage examples!
+```php
+use MLL\Holidays\Holidays;
+
+// Call static methods on Holidays
+```
 
 ## Changelog
 
