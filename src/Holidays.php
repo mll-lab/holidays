@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace MLL\Holidays;
 
 use Carbon\Carbon;
-
 
 class Holidays
 {
@@ -79,8 +80,8 @@ class Holidays
 
         while ($days > 0) {
             $copy->addDay();
-            if (Holidays::isMLLWorkingDay($copy)) {
-                --$days;
+            if (self::isMLLWorkingDay($copy)) {
+                $days--;
             }
         }
 
@@ -134,4 +135,3 @@ class Holidays
         return $date->format('dm');
     }
 }
-
