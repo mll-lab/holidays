@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## v1.0.0
+
 ### Added
 
--
+- Class `Holidays` to ease dealing with working days at MLL
