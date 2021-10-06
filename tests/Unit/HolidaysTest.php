@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace MLL\Holidays\Tests\Unit;
 
@@ -13,9 +11,10 @@ final class HolidaysTest extends TestCase
     public function testName(): void
     {
         self::assertNull(Holidays::name(self::workingDayWednesday()));
+        self::assertSame(Holidays::SAMSTAG, Holidays::name(self::saturday()));
         self::assertSame(Holidays::SONNTAG, Holidays::name(self::sunday()));
-        var_dump(self::easter2019());
-        self::assertSame(Holidays::OSTERSONNTAG, Holidays::name(self::easter2019()));
+        self::assertSame(Holidays::KARFREITAG, Holidays::name(self::karfreitag2019()));
+        self::assertSame(Holidays::OSTERSONNTAG, Holidays::name(self::easterSunday2019()));
     }
 
     /**
@@ -57,7 +56,12 @@ final class HolidaysTest extends TestCase
         return Carbon::createStrict(2019, 10, 30);
     }
 
-    protected static function easter2019(): Carbon
+    protected static function karfreitag2019(): Carbon
+    {
+        return Carbon::createStrict(2019, 4, 19);
+    }
+
+    protected static function easterSunday2019(): Carbon
     {
         return Carbon::createStrict(2019, 4, 21);
     }
@@ -85,7 +89,9 @@ final class HolidaysTest extends TestCase
      */
     public static function holidays(): iterable
     {
-        yield [self::easter2019()];
-        yield [self::easter2019()];
+        yield [self::karfreitag2019()];
+        yield [self::easterSunday2019()];
+        yield [self::saturday()];
+        yield [self::sunday()];
     }
 }

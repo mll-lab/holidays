@@ -33,8 +33,6 @@ class Holidays
     public const REFORMATIONSTAG_500_JAHRE_REFORMATION = 'Reformationstag (500 Jahre Reformation)';
     public const BETRIEBSAUSFLUG_2019 = 'Betriebsausflug 2019';
 
-    public const SECONDS_IN_A_DAY = 60 * 60 * 24;
-
     /**
      * Checks if given date is an MLL working day.
      */
@@ -119,13 +117,14 @@ class Holidays
                 break;
         }
 
-        /** @var array<string, string> $holidays */
         return $holidays;
     }
 
     protected static function dateFromEaster(int $easter, int $daysAway): string
     {
-        $date = Carbon::createFromTimestamp($easter + ($daysAway * self::SECONDS_IN_A_DAY));
+        $date = Carbon::createFromTimestamp($easter)
+            ->setTimezone('Europe/Berlin')
+            ->addDays($daysAway);
 
         return self::dayOfTheYear($date);
     }
