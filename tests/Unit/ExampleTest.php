@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace MLL\Holidays\Tests\Unit;
 
-use PHPUnit\Framework;
 use MLL\Holidays\Example;
+use PHPUnit\Framework;
 
 class ExampleTest extends Framework\TestCase
 {
