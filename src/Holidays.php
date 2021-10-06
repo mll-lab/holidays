@@ -9,16 +9,16 @@ use Carbon\Carbon;
 class Holidays
 {
     public const HOLIDAYS_STATIC = [
-        '0101' => 'Neujahrstag',
-        '0601' => 'Heilige Drei Könige',
-        '0105' => 'Tag der Arbeit',
-        '1508' => 'Maria Himmelfahrt',
-        '0310' => 'Tag der Deutschen Einheit',
-        '0111' => 'Allerheiligen',
-        '2412' => 'Heilig Abend',
-        '2512' => 'Erster Weihnachtstag',
-        '2612' => 'Zweiter Weihnachtstag',
-        '3112' => 'Sylvester',
+        '01.01' => 'Neujahrstag',
+        '06.01' => 'Heilige Drei Könige',
+        '01.05' => 'Tag der Arbeit',
+        '15.08' => 'Maria Himmelfahrt',
+        '03.10' => 'Tag der Deutschen Einheit',
+        '01.11' => 'Allerheiligen',
+        '24.12' => 'Heilig Abend',
+        '25.12' => 'Erster Weihnachtstag',
+        '26.12' => 'Zweiter Weihnachtstag',
+        '31.12' => 'Sylvester',
     ];
 
     public const SAMSTAG = 'Samstag';
@@ -108,14 +108,14 @@ class Holidays
         $holidays[self::dateFromEaster($easter, 60)] = self::FRONLEICHNAM;
 
         // exceptional holidays
-        if ('2017' === $date->format('Y')) {
-            $holidays['3110'] = self::REFORMATIONSTAG_500_JAHRE_REFORMATION;
+        if (2017 === $date->year) {
+            $holidays['31.10'] = self::REFORMATIONSTAG_500_JAHRE_REFORMATION;
         }
 
         // Betriebsausflüge
-        switch ($date->format('Y')) {
-            case '2019':
-                $holidays['2207'] = self::BETRIEBSAUSFLUG_2019;
+        switch ($date->year) {
+            case 2019:
+                $holidays['22.07'] = self::BETRIEBSAUSFLUG_2019;
                 break;
         }
 
@@ -132,6 +132,6 @@ class Holidays
 
     protected static function dayOfTheYear(Carbon $date): string
     {
-        return $date->format('dm');
+        return $date->format('d.m');
     }
 }
