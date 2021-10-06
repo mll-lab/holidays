@@ -12,6 +12,8 @@
   ],
   "require": {
     "php": "^7.4 || ^8",
+    "ext-calendar": "*",
+    "nesbot/carbon": "^2.53",
     "thecodingmachine/safe": "^1"
   },
   "require-dev": {
