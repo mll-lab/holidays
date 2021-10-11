@@ -40,7 +40,7 @@ class BavarianHolidays
      *
      * @example ['23.02' => 'Day of the Tentacle']
      *
-     * @var (callable(int $year): array<string, string>)|null
+     * @var (callable(int): array<string, string>)|null
      */
     public static $loadUserDefinedHolidays;
 
