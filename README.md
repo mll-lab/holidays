@@ -25,6 +25,8 @@ use MLL\Holidays\BavarianHolidays;
 
 ### Custom Holidays
 
+You can add custom holidays by registering a method that returns a map of holidays for a given year.
+
 ```php
 use MLL\Holidays\BavarianHolidays;
 
@@ -37,6 +39,8 @@ BavarianHolidays::$loadUserDefinedHolidays = static function (int $year): array 
     }
 };
 ```
+
+Custom holidays have precedence over the holidays inherent to this library.
 
 ## Changelog
 
