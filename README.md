@@ -26,6 +26,7 @@ use MLL\Holidays\BavarianHolidays;
 ### Custom Holidays
 
 You can add custom holidays by registering a method that returns a map of holidays for a given year.
+Set this up in a central place that always runs before your application, e.g. a bootstrap method.
 
 ```php
 use MLL\Holidays\BavarianHolidays;
