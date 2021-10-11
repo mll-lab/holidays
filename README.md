@@ -18,9 +18,24 @@ composer require mll-lab/holidays
 ## Usage
 
 ```php
-use MLL\Holidays\Holidays;
+use MLL\Holidays\BavarianHolidays;
 
-// Call static methods on Holidays
+// Call static methods on BavarianHolidays
+```
+
+### Custom Holidays
+
+```php
+use MLL\Holidays\BavarianHolidays;
+
+BavarianHolidays::$loadUserDefinedHolidays = static function (int $year): array {
+    switch ($year) {
+        case 2019:
+            return ['22.03' => 'Day of the Tentacle'];
+        default:
+            return [];
+    }
+};
 ```
 
 ## Changelog
