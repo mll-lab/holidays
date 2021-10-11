@@ -1,7 +1,7 @@
 {
   "name": "mll-lab/holidays",
   "type": "library",
-  "description": "PHP package to evaluate if a day is a holiday at MLL",
+  "description": "PHP package to evaluate if a day is a holiday",
   "homepage": "https://github.com/mll-lab/holidays",
   "license": "MIT",
   "authors": [

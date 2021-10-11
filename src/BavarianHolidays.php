@@ -6,7 +6,7 @@ namespace MLL\Holidays;
 
 use Carbon\Carbon;
 
-class Holidays
+class BavarianHolidays
 {
     public const HOLIDAYS_STATIC = [
         '01.01' => 'Neujahrstag',
@@ -31,22 +31,33 @@ class Holidays
     public const PFINGSTMONTAG = 'Pfingstmontag';
     public const FRONLEICHNAM = 'Fronleichnam';
     public const REFORMATIONSTAG_500_JAHRE_REFORMATION = 'Reformationstag (500 Jahre Reformation)';
-    public const BETRIEBSAUSFLUG_2019 = 'Betriebsausflug 2019';
 
     /**
-     * Checks if given date is an MLL working day.
+     * Optionally allows users to define extra holidays for a given year.
+     *
+     * The returned array is expected to be a map from the day of the year
+     * (format with @see self::dayOfTheYear()) to holiday names.
+     *
+     * @example ['23.02' => 'Day of the Tentacle']
+     *
+     * @var (callable(int): array<string, string>)|null
      */
-    public static function isMLLWorkingDay(Carbon $date): bool
+    public static $loadUserDefinedHolidays;
+
+    /**
+     * Checks if given date is a working day.
+     */
+    public static function isWorkingDay(Carbon $date): bool
     {
         return is_null(self::name($date));
     }
 
     /**
-     * Checks if given date is an MLL holiday.
+     * Checks if given date is a holiday.
      */
-    public static function isMLLHoliday(Carbon $date): bool
+    public static function isHoliday(Carbon $date): bool
     {
-        return ! self::isMLLWorkingDay($date);
+        return ! self::isWorkingDay($date);
     }
 
     /**
@@ -71,14 +82,14 @@ class Holidays
         return null;
     }
 
-    public static function addMLLWorkingDays(Carbon $date, int $days): Carbon
+    public static function addWorkingDays(Carbon $date, int $days): Carbon
     {
         // Make sure we do not mutate the original date
         $copy = $date->clone();
 
         while ($days > 0) {
             $copy->addDay();
-            if (self::isMLLWorkingDay($copy)) {
+            if (self::isWorkingDay($copy)) {
                 $days--;
             }
         }
@@ -110,11 +121,12 @@ class Holidays
             $holidays['31.10'] = self::REFORMATIONSTAG_500_JAHRE_REFORMATION;
         }
 
-        // Betriebsausflüge
-        switch ($date->year) {
-            case 2019:
-                $holidays['22.07'] = self::BETRIEBSAUSFLUG_2019;
-                break;
+        // user-defined holidays
+        if (isset(self::$loadUserDefinedHolidays)) {
+            $holidays = array_merge(
+                $holidays,
+                (self::$loadUserDefinedHolidays)($date->year)
+            );
         }
 
         return $holidays;
@@ -129,7 +141,7 @@ class Holidays
         return self::dayOfTheYear($date);
     }
 
-    protected static function dayOfTheYear(Carbon $date): string
+    public static function dayOfTheYear(Carbon $date): string
     {
         return $date->format('d.m');
     }

@@ -43,7 +43,7 @@ repository:
   allow_rebase_merge: false
   allow_squash_merge: false
   default_branch: master
-  description: "PHP package to evaluate if a day is a holiday at MLL"
+  description: "PHP package to evaluate if a day is a holiday"
   has_downloads: true
   has_issues: true
   has_pages: false
