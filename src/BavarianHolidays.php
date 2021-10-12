@@ -6,6 +6,12 @@ namespace MLL\Holidays;
 
 use Carbon\Carbon;
 
+/**
+ * Some definitions:
+ * Holiday: special occasions on a mostly fixed date where there is no work
+ * Weekend Day: Saturday and Sunday
+ * Business Day: any day that is neither a Holiday nor a Weekend Day
+ */
 class BavarianHolidays
 {
     public const HOLIDAYS_STATIC = [
@@ -45,88 +51,44 @@ class BavarianHolidays
     public static $loadUserDefinedHolidays;
 
     /**
-     * Checks if given date is a working day.
-     *
-     * @deprecated use isBusinessDay
-     */
-    public static function isWorkingDay(Carbon $date): bool
-    {
-        return is_null(self::name($date));
-    }
-
-    /**
-     * Checks if given date is a holiday.
-     *
-     * @deprecated use isHolidayStrict to prevent interpreting Saturday and Sunday as holiday
-     */
-    public static function isHoliday(Carbon $date): bool
-    {
-        return ! self::isWorkingDay($date);
-    }
-
-    /**
-     * Checks if given date is a holiday.
-     */
-    public static function isHolidayStrict(Carbon $date): bool
-    {
-        return ! is_null(self::nameStrict($date));
-    }
-
-    /**
      * Checks if given date is a business day.
      */
     public static function isBusinessDay(Carbon $date): bool
     {
-        return is_null(self::nameStrict($date)) &&
-            ! $date->isSaturday() &&
-            ! $date->isSunday();
+        return ! self::isHoliday($date)
+            && ! $date->isWeekend();
     }
 
     /**
-     * Returns the name of the holiday if the date happens to land on one or on Saturday /Sunday.
-     *
-     * @deprecated use nameStrict to prevent interpreting Saturday and Sunday as holiday
+     * Checks if given date is a holiday.
      */
-    public static function name(Carbon $date): ?string
+    public static function isHoliday(Carbon $date): bool
     {
-        if (! is_null(self::nameStrict($date))) {
-            return self::nameStrict($date);
-        }
-
-        if ($date->isSaturday()) {
-            return self::SAMSTAG;
-        }
-
-        if ($date->isSunday()) {
-            return self::SONNTAG;
-        }
-
-        return null;
+        return is_string(self::nameHoliday($date));
     }
 
     /**
      * Returns the name of the holiday if the date happens to land on one.
      * Saturday and Sunday are not evaluated as holiday.
      */
-    public static function nameStrict(Carbon $date): ?string
+    public static function nameHoliday(Carbon $date): ?string
     {
         $holidayMap = self::buildHolidayMap($date);
-        $holiday = $holidayMap[self::dayOfTheYear($date)] ?? null;
-        if (is_string($holiday)) {
-            return $holiday;
-        }
 
-        return null;
+        return $holidayMap[self::dayOfTheYear($date)] ?? null;
     }
 
-    public static function addWorkingDays(Carbon $date, int $days): Carbon
+    /**
+     * Returns a new carbon instance with the given number of business days added.
+     */
+    public static function addBusinessDays(Carbon $date, int $days): Carbon
     {
         // Make sure we do not mutate the original date
         $copy = $date->clone();
 
         while ($days > 0) {
             $copy->addDay();
-            if (self::isWorkingDay($copy)) {
+            if (self::isBusinessDay($copy)) {
                 $days--;
             }
         }
