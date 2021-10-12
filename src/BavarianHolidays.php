@@ -46,6 +46,7 @@ class BavarianHolidays
 
     /**
      * Checks if given date is a working day.
+     * @deprecated use isBusinessDay
      */
     public static function isWorkingDay(Carbon $date): bool
     {
@@ -54,6 +55,7 @@ class BavarianHolidays
 
     /**
      * Checks if given date is a holiday.
+     * @deprecated use isHolidayStrict to prevent interpreting Saturday and Sunday as holiday
      */
     public static function isHoliday(Carbon $date): bool
     {
@@ -61,15 +63,34 @@ class BavarianHolidays
     }
 
     /**
-     * Returns the name of the holiday if the date happens to land on one.
+     * Checks if given date is a holiday.
+     */
+    public static function isHolidayStrict(Carbon $date): bool
+    {
+        return !is_null(self::nameStrict($date));
+    }
+
+
+    /**
+     * Checks if given date is a business day.
+     */
+    public static function isBusinessDay(Carbon $date): bool
+    {
+        return is_null(self::nameStrict($date)) &&
+            !$date->isSaturday() &&
+            !$date->isSunday();
+    }
+
+
+    /**
+     * Returns the name of the holiday if the date happens to land on one or on Saturday /Sunday.
+     * @deprecated use nameStrict to prevent interpreting Saturday and Sunday as holiday
      */
     public static function name(Carbon $date): ?string
     {
-        $holidayMap = self::buildHolidayMap($date);
-        $holiday = $holidayMap[self::dayOfTheYear($date)] ?? null;
-        if (is_string($holiday)) {
-            return $holiday;
-        }
+       if (!is_null(self::nameStrict($date))) {
+           return self::nameStrict($date);
+       }
 
         if ($date->isSaturday()) {
             return self::SAMSTAG;
@@ -79,6 +100,20 @@ class BavarianHolidays
             return self::SONNTAG;
         }
 
+        return null;
+    }
+
+    /**
+     * Returns the name of the holiday if the date happens to land on one.
+     * Saturday and Sunday are not evaluated as holiday
+     */
+    public static function nameStrict(Carbon $date): ?string
+    {
+        $holidayMap = self::buildHolidayMap($date);
+        $holiday = $holidayMap[self::dayOfTheYear($date)] ?? null;
+        if (is_string($holiday)) {
+            return $holiday;
+        }
         return null;
     }
 
