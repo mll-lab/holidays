@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## v2.1.0
+
+### Changed
+
+- Downgrade the required PHP version to `^7.2`
+
 ## v2.0.0
 
 ### Added
