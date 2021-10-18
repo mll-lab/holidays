@@ -96,6 +96,9 @@ class BavarianHolidays
         return $copy;
     }
 
+    /**
+     * Returns a new carbon instance with the given number of business days subtracted.
+     */
     public static function subBusinessDays(Carbon $date, int $days): Carbon
     {
         // Make sure we do not mutate the original date
