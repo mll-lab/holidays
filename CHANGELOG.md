@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v3.1.0
 
-### Changed
+### Added
 
-- Add `BavarianHolidays::subBusinessDays` function
+- Add method `BavarianHolidays::subBusinessDays()`
 
 ## v3.0.0
 
