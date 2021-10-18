@@ -60,6 +60,21 @@ final class BavarianHolidaysTest extends TestCase
         );
     }
 
+    public function testSubMllWorkingDays(): void
+    {
+        $sunday = self::sunday();
+        $thursdayBeforeAllSaints = self::sunday()->subDays(3);
+        self::assertTrue(
+            BavarianHolidays::subBusinessDays($sunday, 1)
+                ->isSameDay($thursdayBeforeAllSaints),
+            'Skips over saturday and all saints holiday (01.01.2019)'
+        );
+        self::assertTrue(
+            $sunday->isSameDay(self::sunday()),
+            'Should not mutate the original date'
+        );
+    }
+
     protected static function businessDayWednesday(): Carbon
     {
         return Carbon::createStrict(2019, 10, 30);

@@ -97,6 +97,24 @@ class BavarianHolidays
     }
 
     /**
+     * Returns a new carbon instance with the given number of business days subtracted.
+     */
+    public static function subBusinessDays(Carbon $date, int $days): Carbon
+    {
+        // Make sure we do not mutate the original date
+        $copy = $date->clone();
+
+        while ($days > 0) {
+            $copy->subDay();
+            if (self::isBusinessDay($copy)) {
+                $days--;
+            }
+        }
+
+        return $copy;
+    }
+
+    /**
      * Returns a map from day/month to named holidays.
      *
      * @return array<string, string>
