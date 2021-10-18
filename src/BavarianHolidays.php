@@ -96,7 +96,7 @@ class BavarianHolidays
         return $copy;
     }
 
-    public static function subWorkingDays(Carbon $date, int $days): Carbon
+    public static function subBusinessDays(Carbon $date, int $days): Carbon
     {
         // Make sure we do not mutate the original date
         $copy = $date->clone();

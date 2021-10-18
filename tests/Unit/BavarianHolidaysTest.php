@@ -65,7 +65,7 @@ final class BavarianHolidaysTest extends TestCase
         $sunday = self::sunday();
         $thursdayBeforeAllSaints = self::sunday()->subDays(3);
         self::assertTrue(
-            BavarianHolidays::subWorkingDays($sunday, 1)
+            BavarianHolidays::subBusinessDays($sunday, 1)
                 ->isSameDay($thursdayBeforeAllSaints),
             'Skips over saturday and all saints holiday (01.01.2019)'
         );

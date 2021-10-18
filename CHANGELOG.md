@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Add `BavarianHolidays::subWorkingDays` function
+- Add `BavarianHolidays::subBusinessDays` function
 
 ## v3.0.0
 
