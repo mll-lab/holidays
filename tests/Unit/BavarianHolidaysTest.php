@@ -10,22 +10,20 @@ use PHPUnit\Framework\TestCase;
 
 final class BavarianHolidaysTest extends TestCase
 {
-    public function testName(): void
+    public function testNameHoliday(): void
     {
-        self::assertNull(BavarianHolidays::name(self::workingDayWednesday()));
-        self::assertSame(BavarianHolidays::SAMSTAG, BavarianHolidays::name(self::saturday()));
-        self::assertSame(BavarianHolidays::SONNTAG, BavarianHolidays::name(self::sunday()));
-        self::assertSame(BavarianHolidays::KARFREITAG, BavarianHolidays::name(self::karfreitag2019()));
-        self::assertSame(BavarianHolidays::OSTERSONNTAG, BavarianHolidays::name(self::easterSunday2019()));
+        self::assertNull(BavarianHolidays::nameHoliday(self::businessDayWednesday()));
+        self::assertSame(BavarianHolidays::KARFREITAG, BavarianHolidays::nameHoliday(self::karfreitag2019()));
+        self::assertSame(BavarianHolidays::OSTERSONNTAG, BavarianHolidays::nameHoliday(self::easterSunday2019()));
     }
 
     /**
-     * @dataProvider workingDays
+     * @dataProvider businessDays
      */
-    public function testWorkingDays(Carbon $workingDay): void
+    public function testBusinessDays(Carbon $businessDay): void
     {
-        self::assertTrue(BavarianHolidays::isWorkingDay($workingDay));
-        self::assertFalse(BavarianHolidays::isHoliday($workingDay));
+        self::assertTrue(BavarianHolidays::isBusinessDay($businessDay));
+        self::assertFalse(BavarianHolidays::isHoliday($businessDay));
     }
 
     /**
@@ -33,17 +31,26 @@ final class BavarianHolidaysTest extends TestCase
      */
     public function testHolidays(Carbon $holiday): void
     {
-        self::assertFalse(BavarianHolidays::isWorkingDay($holiday));
+        self::assertFalse(BavarianHolidays::isBusinessDay($holiday));
         self::assertTrue(BavarianHolidays::isHoliday($holiday));
     }
 
-    public function testAddMllWorkingDays(): void
+    /**
+     * @dataProvider weekend
+     */
+    public function testWeekend(Carbon $weekend): void
+    {
+        self::assertFalse(BavarianHolidays::isBusinessDay($weekend));
+        self::assertFalse(BavarianHolidays::isHoliday($weekend));
+    }
+
+    public function testAddMllBusinessDays(): void
     {
         $saturday = self::saturday();
         $mondayAfter = self::saturday()->addDays(2);
 
         self::assertTrue(
-            BavarianHolidays::addWorkingDays($saturday, 1)
+            BavarianHolidays::addBusinessDays($saturday, 1)
                 ->isSameDay($mondayAfter),
             'Skips over sunday'
         );
@@ -68,7 +75,7 @@ final class BavarianHolidaysTest extends TestCase
         );
     }
 
-    protected static function workingDayWednesday(): Carbon
+    protected static function businessDayWednesday(): Carbon
     {
         return Carbon::createStrict(2019, 10, 30);
     }
@@ -96,9 +103,9 @@ final class BavarianHolidaysTest extends TestCase
     /**
      * @return iterable<int, array{Carbon}>
      */
-    public static function workingDays(): iterable
+    public static function businessDays(): iterable
     {
-        yield [self::workingDayWednesday()];
+        yield [self::businessDayWednesday()];
     }
 
     /**
@@ -108,6 +115,13 @@ final class BavarianHolidaysTest extends TestCase
     {
         yield [self::karfreitag2019()];
         yield [self::easterSunday2019()];
+    }
+
+    /**
+     * @return iterable<int, array{Carbon}>
+     */
+    public static function weekend(): iterable
+    {
         yield [self::saturday()];
         yield [self::sunday()];
     }
@@ -116,9 +130,9 @@ final class BavarianHolidaysTest extends TestCase
     {
         $dayOfTheTentacle = Carbon::createStrict(2019, 8, 22);
 
-        self::assertNull(BavarianHolidays::name($dayOfTheTentacle));
+        self::assertNull(BavarianHolidays::nameHoliday($dayOfTheTentacle));
         self::assertFalse(BavarianHolidays::isHoliday($dayOfTheTentacle));
-        self::assertTrue(BavarianHolidays::isWorkingDay($dayOfTheTentacle));
+        self::assertTrue(BavarianHolidays::isBusinessDay($dayOfTheTentacle));
 
         $name = 'Day of the Tentacle';
         BavarianHolidays::$loadUserDefinedHolidays = static function (int $year) use ($dayOfTheTentacle, $name): array {
@@ -130,8 +144,8 @@ final class BavarianHolidaysTest extends TestCase
             }
         };
 
-        self::assertSame($name, BavarianHolidays::name($dayOfTheTentacle));
+        self::assertSame($name, BavarianHolidays::nameHoliday($dayOfTheTentacle));
         self::assertTrue(BavarianHolidays::isHoliday($dayOfTheTentacle));
-        self::assertFalse(BavarianHolidays::isWorkingDay($dayOfTheTentacle));
+        self::assertFalse(BavarianHolidays::isBusinessDay($dayOfTheTentacle));
     }
 }
