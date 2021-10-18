@@ -97,6 +97,21 @@ class BavarianHolidays
         return $copy;
     }
 
+    public static function subWorkingDays(Carbon $date, int $days): Carbon
+    {
+        // Make sure we do not mutate the original date
+        $copy = $date->clone();
+
+        while ($days > 0) {
+            $copy->subDay();
+            if (self::isWorkingDay($copy)) {
+                $days--;
+            }
+        }
+
+        return $copy;
+    }
+
     /**
      * Returns a map from day/month to named holidays.
      *
