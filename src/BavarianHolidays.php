@@ -103,7 +103,7 @@ class BavarianHolidays
 
         while ($days > 0) {
             $copy->subDay();
-            if (self::isWorkingDay($copy)) {
+            if (self::isBusinessDay($copy)) {
                 $days--;
             }
         }
