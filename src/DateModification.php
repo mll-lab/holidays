@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MLL\Holidays;
 
 use Carbon\Carbon;
@@ -7,7 +9,7 @@ use Carbon\Carbon;
 class DateModification
 {
     /**
-     * @param callable(Carbon): bool $shouldCount Should the given date be added?.
+     * @param  callable(Carbon): bool  $shouldCount  Should the given date be added?.
      */
     public static function addDays(Carbon $date, int $days, callable $shouldCount): Carbon
     {
@@ -25,7 +27,7 @@ class DateModification
     }
 
     /**
-     * @param callable(Carbon): bool $shouldCount Should the given date be subtracted?.
+     * @param  callable(Carbon): bool  $shouldCount  Should the given date be subtracted?.
      */
     public static function subDays(Carbon $date, int $days, callable $shouldCount): Carbon
     {
