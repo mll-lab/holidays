@@ -83,17 +83,7 @@ class BavarianHolidays
      */
     public static function addBusinessDays(Carbon $date, int $days): Carbon
     {
-        // Make sure we do not mutate the original date
-        $copy = $date->clone();
-
-        while ($days > 0) {
-            $copy->addDay();
-            if (self::isBusinessDay($copy)) {
-                $days--;
-            }
-        }
-
-        return $copy;
+        return DateModification::addDays($date, $days, [self::class, 'isBusinessDay']);
     }
 
     /**
@@ -101,17 +91,7 @@ class BavarianHolidays
      */
     public static function subBusinessDays(Carbon $date, int $days): Carbon
     {
-        // Make sure we do not mutate the original date
-        $copy = $date->clone();
-
-        while ($days > 0) {
-            $copy->subDay();
-            if (self::isBusinessDay($copy)) {
-                $days--;
-            }
-        }
-
-        return $copy;
+        return DateModification::subDays($date, $days, [self::class, 'isBusinessDay']);
     }
 
     /**
