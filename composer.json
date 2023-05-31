@@ -14,19 +14,19 @@
     "php": "^7.2 || ^8",
     "ext-calendar": "*",
     "nesbot/carbon": "^2.53",
-    "thecodingmachine/safe": "^1"
+    "thecodingmachine/safe": "^1 || ^2"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2",
     "infection/infection": "~0.25",
-    "jangregor/phpstan-prophecy": "~0.8",
+    "jangregor/phpstan-prophecy": "^1",
     "phpstan/extension-installer": "^1",
-    "phpstan/phpstan": "~0.12",
-    "phpstan/phpstan-deprecation-rules": "~0.12",
-    "phpstan/phpstan-phpunit": "~0.12",
-    "phpstan/phpstan-strict-rules": "~0.12",
-    "phpunit/phpunit": "^9",
-    "symfony/var-dumper": "^5",
+    "phpstan/phpstan": "^1",
+    "phpstan/phpstan-deprecation-rules": "^1",
+    "phpstan/phpstan-phpunit": "^1",
+    "phpstan/phpstan-strict-rules": "^1",
+    "phpunit/phpunit": "^9 || ^10",
+    "symfony/var-dumper": "^5 || ^6",
     "thecodingmachine/phpstan-safe-rule": "^1"
   },
   "config": {
@@ -34,7 +34,12 @@
       "php": "7.4.24"
     },
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "infection/extension-installer": true,
+      "ergebnis/composer-normalize": true,
+      "phpstan/extension-installer": true
+    }
   },
   "autoload": {
     "psr-4": {
