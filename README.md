@@ -1,5 +1,9 @@
 # Holidays
 
+## Deprecated
+
+This library is deprecated in favor of https://github.com/mll-lab/php-utils.
+
 [![Continuous Integration](https://github.com/mll-lab/holidays/workflows/Continuous%20Integration/badge.svg)](https://github.com/mll-lab/holidays/actions)
 [![Code Coverage](https://codecov.io/gh/mll-lab/holidays/branch/master/graph/badge.svg)](https://codecov.io/gh/mll-lab/holidays)
 [![StyleCI](https://github.styleci.io/repos/414166520/shield?branch=master)](https://github.styleci.io/repos/414166520)
